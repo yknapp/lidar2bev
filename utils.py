@@ -115,7 +115,7 @@ def makeBVFeature_old(PointCloud_, BoundaryCond, img_height, img_width, Discreti
     # RGB channels respectively
     RGB_Map[:, :, 0] = densityMap
     #RGB_Map[:, :, 1] = heightMap_normalized
-    RGB_Map[:, :, 1] = heightMap_normalized
+    RGB_Map[:, :, 1] = heightMap
     RGB_Map[:, :, 2] = intensityMap / 255
 
     # normalize RGB_Map from [0, 1] to [0, 255]
