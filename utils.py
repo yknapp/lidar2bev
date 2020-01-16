@@ -25,6 +25,7 @@ def removePoints(PointCloud, BoundaryCond):
             (PointCloud[:, 2] <= maxZ)
             )
     PointCloud = PointCloud[mask]
+    PointCloud[:, 2] = PointCloud[:, 2] - minZ
     return PointCloud
 
 
