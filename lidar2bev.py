@@ -12,6 +12,8 @@ KITTI_LIDAR_DIR = "/home/user/datasets/kitti/kitti/object/training/velodyne"
 KITTI_OUTPUT_DIR = "/home/user/datasets/bev_images/kitti/training"
 LYFT_LIDAR_DIR = "/home/user/datasets/lyft_level_5/v1.02-train/lidar"
 LYFT_OUTPUT_DIR = "/home/user/datasets/bev_images/lyft"
+LYFT_KITTI_LIDAR_DIR = "/home/user/datasets/lyft_kitti/object/training/velodyne"
+LYFT_KITTI_OUTPUT_DIR = "/home/user/datasets/bev_images/lyft_kitti"
 NUSCENES_LIDAR_DIR = "/home/user/datasets/nuscenes/samples/LIDAR_TOP"
 NUSCENES_OUTPUT_DIR = "/home/user/datasets/bev_images/nuscenes/samples"
 
@@ -113,6 +115,10 @@ def main(chosen_dataset, img_height, img_width):
         load_lidar_file = load_lidar_file_nuscenes
         lidar_path = NUSCENES_LIDAR_DIR
         output_dir = NUSCENES_OUTPUT_DIR
+    elif chosen_dataset == "lyftkitti":
+        load_lidar_file = load_lidar_file_kitti
+        lidar_path = LYFT_KITTI_LIDAR_DIR
+        output_dir = LYFT_KITTI_OUTPUT_DIR
     else:
         print("Error: Unknown dataset '%s'" % chosen_dataset)
         sys.exit()
@@ -152,5 +158,5 @@ def main(chosen_dataset, img_height, img_width):
 if __name__ == "__main__":
     img_height = 256
     img_width = 512
-    dataset = "kitti"  # 'kitti', 'lyft' or 'nuscenes'
+    dataset = "lyftkitti"  # 'kitti', 'lyft', 'nuscenes' or 'lyftkitti'
     main(dataset, img_height, img_width)
