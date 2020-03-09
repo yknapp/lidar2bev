@@ -8,8 +8,8 @@ from nuscenes.utils.data_classes import LidarPointCloud
 from scipy.spatial.transform import Rotation as R
 
 # Paths
-KITTI_LIDAR_DIR = "/home/user/datasets/kitti/kitti/object/training/velodyne"
-KITTI_OUTPUT_DIR = "/home/user/datasets/bev_images/kitti/training"
+KITTI_LIDAR_DIR = "/home/user/work/master_thesis/datasets/kitti/kitti/object/training/velodyne"
+KITTI_OUTPUT_DIR = "/home/user/work/master_thesis/datasets/bev_images/kitti/training"
 LYFT_LIDAR_DIR = "/home/user/datasets/lyft_level_5/v1.02-train/lidar"
 LYFT_OUTPUT_DIR = "/home/user/datasets/bev_images/lyft"
 LYFT_KITTI_LIDAR_DIR = "/home/user/datasets/lyft_kitti/object/training/velodyne"
@@ -153,6 +153,12 @@ def main(chosen_dataset, img_height, img_width):
         # create Bird's Eye View
         discretization = (BOUNDARY["maxX"] - BOUNDARY["minX"]) / img_height
         lidar_bev = utils.makeBVFeature(lidar_pc_filtered, BOUNDARY, img_height, img_width, discretization)
+        #print("min: ", np.amin(lidar_bev[:, :, 0]))
+        #print("max: ", np.amax(lidar_bev[:, :, 0]))
+        #print("min: ", np.amin(lidar_bev[:, :, 1]))
+        #print("max: ", np.amax(lidar_bev[:, :, 1]))
+        #print("min: ", np.amin(lidar_bev[:, :, 2]))
+        #print("max: ", np.amax(lidar_bev[:, :, 2]))
         ########################
         # set intensity to zero since lyft doesn't provide intensity values
         lidar_bev[:, :, 2] = 0.0
@@ -171,8 +177,7 @@ def main(chosen_dataset, img_height, img_width):
 
 
 if __name__ == "__main__":
-    img_height = 418
-    img_width = 418
-    dataset = "audi"  # 'kitti', 'lyft', 'nuscenes', 'lyftkitti' or 'audi'
+    img_height = 480
+    img_width = 480
+    dataset = "kitti"  # 'kitti', 'lyft', 'nuscenes', 'lyftkitti' or 'audi'
     main(dataset, img_height, img_width)
-
