@@ -10,13 +10,13 @@ from scipy.spatial.transform import Rotation as R
 # Paths
 KITTI_LIDAR_DIR = "/home/user/work/master_thesis/datasets/kitti/kitti/object/training/velodyne"
 KITTI_OUTPUT_DIR = "/home/user/work/master_thesis/datasets/bev_images/kitti/training"
-LYFT_LIDAR_DIR = "/home/user/datasets/lyft_level_5/v1.02-train/lidar"
-LYFT_OUTPUT_DIR = "/home/user/datasets/bev_images/lyft"
-LYFT_KITTI_LIDAR_DIR = "/home/user/datasets/lyft_kitti/object/training/velodyne"
-LYFT_KITTI_OUTPUT_DIR = "/home/user/datasets/bev_images/lyft_kitti"
-NUSCENES_LIDAR_DIR = "/home/user/datasets/nuscenes/samples/LIDAR_TOP"
-NUSCENES_OUTPUT_DIR = "/home/user/datasets/bev_images/nuscenes/samples"
-AUDI_LIDAR_DIR = "/home/user/work/master_thesis/datasets/audi/camera_lidar_semantic_bboxes/20181108_103155/lidar/cam_front_center"
+LYFT_LIDAR_DIR = "/home/user/work/master_thesis/datasets/lyft_level_5/v1.02-train/lidar"
+LYFT_OUTPUT_DIR = "/home/user/work/master_thesis/datasets/bev_images/lyft"
+LYFT_KITTI_LIDAR_DIR = "/home/user/work/master_thesis/datasets/lyft_kitti/object/training/velodyne"
+LYFT_KITTI_OUTPUT_DIR = "/home/user/work/master_thesis/datasets/bev_images/lyft_kitti"
+NUSCENES_LIDAR_DIR = "/home/user/work/master_thesis/datasets/nuscenes/samples/LIDAR_TOP"
+NUSCENES_OUTPUT_DIR = "/home/user/work/master_thesis/datasets/bev_images/nuscenes/samples"
+AUDI_LIDAR_DIR = "/home/user/work/master_thesis/datasets/audi/camera_lidar_semantic_bboxes/lidar/cam_front_center"
 AUDI_OUTPUT_DIR = "/home/user/work/master_thesis/datasets/bev_images/audi/"
 
 # lidar boundarys for Bird's Eye View
@@ -164,6 +164,12 @@ def main(chosen_dataset, img_height, img_width):
         lidar_bev[:, :, 2] = 0.0
         ########################
 
+        ########################
+        # binary bev
+        #lidar_bev_mask = lidar_bev[:, :, 1] > 0.0
+        #lidar_bev = lidar_bev_mask.astype(int)
+        ########################
+
         # save as PNG image with the same image name like lidar file
         output_filename = lidar_pc_filenames[idx].replace(".bin", ".png").replace(".npz", ".png")
         output_filepath = os.path.join(output_dir, output_filename)
@@ -173,7 +179,7 @@ def main(chosen_dataset, img_height, img_width):
         #check_identity_of_img(output_filepath, lidar_bev)
         #check_identity_of_img_float(output_filepath, lidar_bev)
 
-    print("\nSuccesfully transformed all '%s' lidar pointclouds" % chosen_dataset)
+    print("\nSuccessfully transformed all '%s' lidar pointclouds" % chosen_dataset)
 
 
 if __name__ == "__main__":
